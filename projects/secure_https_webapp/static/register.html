@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Secure WebApp</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-min.js"></script> -->
+    <script src="/static/js/knockout-3.5.1.js"></script>
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2>Register</h2>
+    <input type="text" class="form-control" placeholder="Username" data-bind="value: username"><br>
+    <input type="password" class="form-control" placeholder="Password" data-bind="value: password"><br>
+    <button class="btn btn-success" data-bind="click: register">Register</button>
+    <p><a href="#" data-bind="click: () => registerMode(false)">Back to login</a></p>
+</div>
+<script>
+function AppViewModel() {
+    var self = this;
+    self.username = ko.observable("");
+    self.password = ko.observable("");
+    self.register = function() {
+        $.post("/register", { username: self.username(), password: self.password() }, function(data) {
+            alert("Registration successful. Please log in.");
+            //self.registerMode(false);
+            history.back(); // Goes back one step in the browser history
+        });
+    };
+}
+ko.applyBindings(new AppViewModel());
+</script>
+</body>
+</html>

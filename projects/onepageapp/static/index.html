@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="/static/js/knockout/knockout-3.5.1.js"></script>
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <nav>
+    <button onclick="app.loadPage('home')">Home</button>
+    <button onclick="app.loadPage('about')">About</button>
+  </nav>
+
+  <div id="view-container" data-bind="html: currentHtml"></div>
+</body>
+</html>
