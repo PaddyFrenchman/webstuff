@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OAuth2 Knockout App</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/knockout@3.5.1/build/knockout.js"></script>
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div class="container" data-bind="visible: !isAuthenticated()">
+    <h2>Login</h2>
+    <form data-bind="submit: login">
+      <label>Email: <input type="email" data-bind="value: email" required></label><br>
+      <label>Password: <input type="password" data-bind="value: password" required></label><br>
+      <button type="submit">Login</button>
+      <div data-bind="text: error, visible: error"></div>
+    </form>
+  </div>
+
+  <div class="container" data-bind="visible: isAuthenticated">
+    <h2>Welcome</h2>
+    <p data-bind="text: message"></p>
+    <button data-bind="click: logout">Logout</button>
+  </div>
+</body>
+</html>

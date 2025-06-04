@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	users = map[string]string{"user1": "pass1"}
+	users = map[string]string{"paddy@x.mail": "pass1"}
 
 	sessions   = map[string]string{}
 	sessionsMu sync.Mutex
@@ -31,11 +31,12 @@ func main() {
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
 
 	http.HandleFunc("/", landingHandler)
-	http.HandleFunc("/login", loginHandler)
 	http.HandleFunc("/login_submit", loginSubmitHandler)
+	//http.HandleFunc("/login", loginHandler)
+	http.HandleFunc("/main", mainHandler)
 	http.HandleFunc("/contact", withAuth(contactHandler))
 	http.HandleFunc("/api/contact", withAuth(contactAPIHandler))
-	log.Println("Server running on http://localhost:8080")
+	log.Println("Server running on http://localhost:8480")
 	log.Fatal(http.ListenAndServe(":8480", nil))
 }
 
@@ -73,19 +74,31 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, nil)
 }
 
-func loginSubmitHandler(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
-	username := r.Form.Get("username")
-	password := r.Form.Get("password")
+type LoginRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
 
-	if pw, ok := users[username]; !ok || pw != password {
-		http.Redirect(w, r, "/login", http.StatusFound)
+func mainHandler(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("templates/main.html")
+	t.Execute(w, nil)
+
+}
+
+func loginSubmitHandler(w http.ResponseWriter, r *http.Request) {
+	var req LoginRequest
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil {
+		http.Error(w, "Invalid JSON", http.StatusBadRequest)
+		return
+	}
+	if req.Password != users[req.Email] {
 		return
 	}
 
-	sessionID := username + "_sess"
+	sessionID := req.Email + "_sess"
 	sessionsMu.Lock()
-	sessions[sessionID] = username
+	sessions[sessionID] = req.Email
 	sessionsMu.Unlock()
 
 	cookie := http.Cookie{
@@ -95,7 +108,9 @@ func loginSubmitHandler(w http.ResponseWriter, r *http.Request) {
 		Expires: time.Now().Add(24 * time.Hour),
 	}
 	http.SetCookie(w, &cookie)
-	http.Redirect(w, r, "/contact", http.StatusFound)
+	http.Redirect(w, r, "/main", http.StatusSeeOther)
+	//http.Redirect(w, r, "/main.html", http.StatusFound)
+	//http.Redirect(w, r, "/contact", http.StatusFound)
 }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
