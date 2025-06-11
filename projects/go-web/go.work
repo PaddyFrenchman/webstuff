@@ -1,1 +1,15 @@
 go 1.24.0
+
+use (
+	./config
+	./internal/appcontext
+	./internal/cache
+	./internal/controller
+	./internal/core
+	./internal/core/errors
+	./internal/core/middleware
+	./internal/i18n
+	./internal/models
+	./internal/store
+	./server
+)

@@ -5,10 +5,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"go-web/internal/models"
+
 	"github.com/labstack/echo/v4"
-	"github.com/starptech/go-web/internal/context"
-	"github.com/starptech/go-web/internal/core/middleware"
-	"github.com/starptech/go-web/internal/models"
+	"go-web/internal/appcontext"
+	"go-web/internal/core/middleware"
 	"github.com/stretchr/testify/assert"
 )
 

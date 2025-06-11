@@ -3,8 +3,9 @@ package controller
 import (
 	"net/http"
 
+	"go-web/internal/appcontext"
+
 	"github.com/labstack/echo/v4"
-	"github.com/starptech/go-web/internal/context"
 )
 
 type Healthcheck struct{}
@@ -16,7 +17,7 @@ type healthcheckReport struct {
 
 // GetHealthcheck returns the current functional state of the application
 func (ctrl Healthcheck) GetHealthcheck(c echo.Context) error {
-	cc := c.(*context.AppContext)
+	cc := c.(*appcontext.AppContext)
 	m := healthcheckReport{Health: "OK"}
 
 	dbCheck := cc.UserStore.Ping()

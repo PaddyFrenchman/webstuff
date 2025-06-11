@@ -1,4 +1,4 @@
-module config
+module go-web/config
 
 go 1.24.0
 

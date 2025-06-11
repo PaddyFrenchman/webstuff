@@ -7,13 +7,14 @@ import (
 	"os/signal"
 	"time"
 
+	"go-web/config"
+	"go-web/internal/cache"
+	"go-web/internal/i18n"
+	"go-web/internal/models"
+
 	"github.com/go-redis/redis"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
-	"github.com/starptech/go-web/config"
-	"github.com/starptech/go-web/internal/cache"
-	"github.com/starptech/go-web/internal/i18n"
-	"github.com/starptech/go-web/internal/models"
 )
 
 type Server struct {

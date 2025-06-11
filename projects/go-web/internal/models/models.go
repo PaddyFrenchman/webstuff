@@ -6,9 +6,10 @@ import (
 	"strings"
 	"time"
 
+	"go-web/config"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"github.com/starptech/go-web/config"
 )
 
 // Model facilitate database interactions

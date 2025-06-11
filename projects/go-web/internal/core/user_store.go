@@ -1,8 +1,9 @@
 package core
 
 import (
+	"go-web/internal/models"
+
 	"github.com/jinzhu/gorm"
-	"github.com/starptech/go-web/internal/models"
 )
 
 // UserStore implements the UserStore interface

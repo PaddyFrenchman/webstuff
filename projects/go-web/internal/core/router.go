@@ -1,11 +1,12 @@
 package core
 
 import (
+	"go-web/internal/appcontext"
+	mid "go-web/internal/core/middleware"
+	"go-web/internal/i18n"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/starptech/go-web/internal/context"
-	mid "github.com/starptech/go-web/internal/core/middleware"
-	"github.com/starptech/go-web/internal/i18n"
 
 	v "gopkg.in/go-playground/validator.v9"
 )
@@ -15,7 +16,7 @@ func NewRouter(server *Server) *echo.Echo {
 	e := echo.New()
 	e.Validator = &Validator{validator: v.New()}
 
-	cc := context.AppContext{
+	cc := appcontext.AppContext{
 		Cache:     &CacheStore{Cache: server.cache},
 		Config:    config,
 		UserStore: &UserStore{DB: server.db},

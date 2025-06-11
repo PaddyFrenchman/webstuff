@@ -1,0 +1,4 @@
+github.com/mattn/kinako v0.0.0-20170717041458-332c0a7e205a h1:0Q3H0YXzMHiciXtRcM+j0jiCe8WKPQHoRgQiRTnfcLY=
+github.com/mattn/kinako v0.0.0-20170717041458-332c0a7e205a/go.mod h1:CdTTBOYzS5E4mWS1N8NWP6AHI19MP0A2B18n3hLzRMk=
+gopkg.in/leonelquinteros/gotext.v1 v1.3.1 h1:8d9/fdTG0kn/B7NNGV1BsEyvektXFAbkMsTZS2sFSCc=
+gopkg.in/leonelquinteros/gotext.v1 v1.3.1/go.mod h1:X1WlGDeAFIYsW6GjgMm4VwUwZ2XjI7Zan2InxSUQWrU=

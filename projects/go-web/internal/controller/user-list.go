@@ -1,12 +1,13 @@
 package controller
 
 import (
+	"go-web/internal/appcontext"
 	"net/http"
 
+	"go-web/internal/core/errors"
+	"go-web/internal/models"
+
 	"github.com/labstack/echo/v4"
-	"github.com/starptech/go-web/internal/context"
-	"github.com/starptech/go-web/internal/core/errors"
-	"github.com/starptech/go-web/internal/models"
 )
 
 type (
@@ -17,7 +18,7 @@ type (
 )
 
 func (ctrl UserList) GetUsers(c echo.Context) error {
-	cc := c.(*context.AppContext)
+	cc := c.(*appcontext.AppContext)
 
 	users := []models.User{}
 
