@@ -1,4 +1,4 @@
-module go-web/server
+module go-web/app-webserver
 
 go 1.24.0
 
