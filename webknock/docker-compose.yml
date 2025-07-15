@@ -1,0 +1,21 @@
+services:
+ go-builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: go-builder
+    volumes:
+      - .:/app
+    working_dir: /app
+    tty: true
+ webknock:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./library.db:/app/library.db
+    environment:
+      - GIN_MODE=release
+    restart: unless-stopped
